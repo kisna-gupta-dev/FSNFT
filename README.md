@@ -1,56 +1,52 @@
-FallonStudioNFT (FSNFT)
+# 🎨 FallonStudioNFT (`FSNFT`)
 
-A simple and extensible ERC721 NFT smart contract built using OpenZeppelin standards.
-This contract allows the owner to mint NFTs with metadata URIs and provides a custom NFT transfer function, along with standard ERC721 transfer methods.
+A simple and extensible **ERC721 NFT smart contract** built using **OpenZeppelin** standards.  
+This contract allows the **owner** to mint NFTs with metadata URIs and provides a custom **NFT transfer function**, along with standard ERC721 transfer methods.
 
-📖 Overview
+---
 
-Standard: ERC721 (Non-Fungible Token)
+## 📖 Overview
+- **Standard:** ERC721 (Non-Fungible Token)  
+- **Symbol:** FSNFT  
+- **Name:** FallonStudioNFT  
+- **Compiler:** Solidity `^0.8.20`  
+- **Framework:** OpenZeppelin Contracts  
 
-Symbol: FSNFT
+The contract is designed as a lightweight **base implementation** for NFT projects at **FallonStudio**, which can be extended with more advanced features like royalties, marketplaces, or utility integrations.
 
-Name: FallonStudioNFT
+---
 
-Compiler: Solidity ^0.8.20
+## ✨ Features
+- ✅ **Mint NFTs** (only by the contract owner)  
+- ✅ **Set Metadata URI** for each NFT  
+- ✅ **Transfer NFTs** using a custom `transferNFT` function  
+- ✅ **Events** for minting and transferring:
+  - `NFTMinted(tokenId)`
+  - `NFTTransferred(from, to, tokenId)`  
+- ✅ Fully compliant with ERC721 standard  
 
-Framework: OpenZeppelin Contracts
+---
 
-The contract is designed as a lightweight base implementation for NFT projects at FallonStudio, which can be extended with more advanced features like royalties, marketplaces, or utility integrations.
+## 📂 Contract Functions
 
-✨ Features
-
-✅ Mint NFTs (only by the contract owner)
-
-✅ Set Metadata URI for each NFT
-
-✅ Transfer NFTs using a custom transferNFT function
-
-✅ Events for minting and transferring:
-
-NFTMinted(tokenId)
-
-NFTTransferred(from, to, tokenId)
-
-✅ Fully compliant with ERC721 standard
-
-📂 Contract Structure
-
-mintNFT(address to, string memory tokenURI)
-Mints a new NFT to a specified address with metadata URI.
-
-Access: onlyOwner
-
+### 🖼 Mint NFT
+```solidity
+function mintNFT(address to, string memory tokenURI) external onlyOwner returns (uint256)
+```
+Mints a new NFT to the specified address with a metadata URI.
 Emits: NFTMinted
+```solidity
+function transferNFT(address from, address to, uint256 tokenId) external
+```
+Safely transfers an NFT between users.
 
-transferNFT(address from, address to, uint256 tokenId)
-Custom transfer function that safely transfers NFTs between users.
-
-Access: Owner or approved token holder
+Caller must be owner or approved.
 
 Emits: NFTTransferred
 
+---
 🚀 Deployment
-Prerequisites
+1Prerequisites
 
 Node.js & npm
 
@@ -60,17 +56,14 @@ MetaMask or any Ethereum wallet
 
 OpenZeppelin Contracts
 
-Install Dependencies
+```bash 
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers
 npm install @openzeppelin/contracts
-
-Compile
 npx hardhat compile
+```
 
-Deploy
-
-Update your deployment script (scripts/deploy.js) with:
-
+Deploy Script (Hardhat)
+```javascript
 const hre = require("hardhat");
 
 async function main() {
@@ -85,18 +78,16 @@ main().catch((error) => {
   process.exitCode = 1;
 });
 
+```
 
-Run deployment:
-
+Run Deployment
+```bash 
 npx hardhat run scripts/deploy.js --network <your_network>
 
-🛠 Usage
-Mint NFT
-mintNFT(0xReceiverAddress, "ipfs://QmExampleHash/metadata.json")
-
-Transfer NFT
-transferNFT(0xFrom, 0xTo, 1)
-
+```
 📜 License
 
 This project is licensed under the MIT License.
+
+
+
